@@ -1,22 +1,27 @@
 from tkinter import *
 from tkinter import messagebox  # This is not a class, it is just a piece of code, hence we need to import manually
 import random
+
+
 # import pyperclip
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 # Password Generator Project
 def generate_password():
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-               'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+               'v',
+               'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
+               'R',
                'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-    nr_letters = random.randint(8, 10)
+    nr_letters = random.randint(8, 10)  # Generate random letters (8,9,10)
     # print(nr_letters)
-    nr_symbols = random.randint(2, 4)
-    nr_numbers = random.randint(2, 4)
+    nr_symbols = random.randint(2, 4)   # Generate random symbols (2,3,4)
+    nr_numbers = random.randint(2, 4)   # Generate random numbers (2,3,4)
 
+    # Generate a list 'password_letters' of random letters
     password_letters = [random.choice(letters) for _ in range(nr_letters)]
     # print(password_letters)
     # for char in range(nr_letters):
@@ -33,7 +38,7 @@ def generate_password():
     password_list = password_letters + password_symbols + password_numbers
     random.shuffle(password_list)
 
-    password = "".join(password_list)
+    password = "".join(password_list)   # Converting list to string
     password_input.insert(0, password)
     # pyperclip.copy(password) # get generated password automatically copied to clipboard
 
@@ -47,7 +52,6 @@ def generate_password():
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
     # Extract the values entered by user:
-
     website_text = website_input.get()
     password_text = password_input.get()
     email_text = email_us_input.get()
@@ -56,7 +60,7 @@ def save():
         messagebox.showinfo(title="Oops !!", message="Please make sure you haven't left any fields empty !!!")
     else:
         is_ok = messagebox.askokcancel(title=website_text,
-                                       message=f"These are the details entered: \nWebsite: {website_text}\nEmail: {email_text}"
+                                       message=f"These are the details entered: \nWebsite: {website_text}\nEmail: {email_text} "
                                                f"\nPassword: {password_text}\nIs it ok to save? ")
 
         if is_ok:
@@ -102,10 +106,10 @@ password_input = Entry(width=33)
 password_input.grid(column=1, row=3, columnspan=1)
 
 # Generate password Button
-gen_button = Button(text="Generate Password", height=1,command = generate_password)
+gen_button = Button(text="Generate Password", height=1, command=generate_password)  # Call generate_password
 gen_button.grid(column=2, row=3)
 # Add Button
-add_button = Button(text="Add", width=44, command=save)
+add_button = Button(text="Add", width=44, command=save) # Call save func to save the details to txt file.
 add_button.grid(column=1, row=4, columnspan=2)
 
 window.mainloop()
